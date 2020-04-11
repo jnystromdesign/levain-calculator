@@ -10,15 +10,20 @@
       <ValueDisplay label="Flour" v-bind:amount="flour" />
       <ValueDisplay label="Water" v-bind:amount="water" />
     </div>
+    <Entries
+      :currentLevainAmount="availableLevain"
+      :setAvailableLevain="setAvailableLevain"
+    />
   </div>
 </template>
 
 <script>
 import ValueDisplay from "./ValueDisplay";
 import InputWithControls from "./InputWithControls";
+import Entries from "./Entries";
 export default {
   name: "Calculator",
-  components: { ValueDisplay, InputWithControls },
+  components: { ValueDisplay, InputWithControls, Entries },
   props: {
     initialAvailableLevain: {
       default: 300
@@ -57,6 +62,9 @@ export default {
     },
     decreaseField() {
       this.availableLevain = this.availableLevain - 10;
+    },
+    setAvailableLevain(value) {
+      this.availableLevain = value;
     }
   }
 };

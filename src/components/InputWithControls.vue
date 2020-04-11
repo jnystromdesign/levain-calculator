@@ -1,20 +1,23 @@
 <template>
-  <div class="levain-input-controls">
-    <button class="btn decrease" @click="$emit('decrease')">-</button>
-    <div class="levain-input">
-      <label for="levain_available">Levain available</label>
+  <div>
+    <label for="levain_available">Levain available</label>
+    <div class="levain-input-controls">
+      <button class="btn decrease" @click="$emit('decrease')">-</button>
+
       <input
         v-bind:value="fieldValue"
         @input="$emit('change', $event.target.value)"
         name="levain_available"
         id="levain_available"
+        class="levain-input"
         type="number"
         min="50"
         pattern="[0-9]*"
         inputmode="numeric"
       />
+
+      <button class="btn increase" @click="$emit('increase')">+</button>
     </div>
-    <button class="btn increase" @click="$emit('increase')">+</button>
   </div>
 </template>
 
@@ -31,7 +34,6 @@ export default {
   display: block;
   width: 5rem;
   flex: 0 0 auto;
-  margin-top: 1.5rem;
   font-size: 3rem;
   cursor: pointer;
   border-radius: 10px 0 0 10px;
