@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="openPopup">Make 🍞</button>
     <button @click="addEntry">+ Save weight</button>
     <div class="entries"></div>
     <table>
@@ -32,7 +33,8 @@ export default {
   components: { Entry },
   props: {
     currentLevainAmount: Number,
-    setAvailableLevain: Function
+    setAvailableLevain: Function,
+    openPopup: Function
   },
   mounted() {
     if (localStorage.entries && localStorage.entries.length > 0) {

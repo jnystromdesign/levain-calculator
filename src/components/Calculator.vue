@@ -10,9 +10,16 @@
       <ValueDisplay label="Flour" v-bind:amount="flour" />
       <ValueDisplay label="Water" v-bind:amount="water" />
     </div>
+
+    <Bake
+      v-if="popupOpen"
+      :availableLevain="availableLevain"
+      :closePopup="closePopup"
+    ></Bake>
     <Entries
       :currentLevainAmount="availableLevain"
       :setAvailableLevain="setAvailableLevain"
+      :openPopup="openPopup"
     />
   </div>
 </template>
@@ -21,12 +28,16 @@
 import ValueDisplay from "./ValueDisplay";
 import InputWithControls from "./InputWithControls";
 import Entries from "./Entries";
+import Bake from "./Bake";
 export default {
   name: "Calculator",
-  components: { ValueDisplay, InputWithControls, Entries },
+  components: { ValueDisplay, InputWithControls, Entries, Bake },
   props: {
     initialAvailableLevain: {
-      default: 300
+      default: 270
+    },
+    popupOpen: {
+      default: false
     }
   },
   data: function() {
@@ -51,8 +62,8 @@ export default {
     }
   },
   methods: {
-    getProportion: function(amount) {
-      return Math.floor((this.availableLevain / 300) * amount);
+    getProportion: function(amount, baseAmount = 300) {
+      return Math.floor((this.availableLevain / baseAmount) * amount);
     },
     updateField(value) {
       this.availableLevain = parseInt(value);
@@ -65,6 +76,12 @@ export default {
     },
     setAvailableLevain(value) {
       this.availableLevain = value;
+    },
+    openPopup() {
+      this.popupOpen = true;
+    },
+    closePopup() {
+      this.popupOpen = false;
     }
   }
 };
